@@ -5,8 +5,8 @@ RPN is a web service that can parse reverse polish notation string and then writ
 RPN will use master and slave mode to make sure whole system has high avaible feature. The distribuit system algorithm will use memberlist protocal. 
 
 ## API
-###/parse
+### /parse
 This api recieves single reverse polish notation string as input and return result as JSON format.
 
-###/batch
+### /batch
 This api recieves multiple reverse polish notation string in JSON format and return result as JSON format too.
