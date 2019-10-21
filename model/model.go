@@ -1,4 +1,4 @@
-package main
+package model
 
 type RPN struct {
 	RPN    string `json:"name"`
