@@ -1,8 +1,18 @@
 package model
 
 type RPN struct {
-	RPN    string `json:"name"`
+	Name   string `json:"name"`
 	Result int    `json:"result"`
 }
 
-type RPNs []RPN
+type RPNs struct {
+	RPN []RPN `json:"rpn"`
+}
+
+type RPNInput struct {
+	Input string `json:"input"`
+}
+
+type RPNInputs struct {
+	Inputs []RPNInput `json:"rpns"`
+}
