@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -59,7 +60,17 @@ func RpnHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "error = %v", err)
 	}
 	log.Printf("res = %v", res)
+
+	rpnRes := RPN{
+		RPN:    rpnstr,
+		Result: res,
+	}
+
+	if err := json.NewEncoder(w).Encode(rpnRes); err != nil {
+		fmt.Fprintf(w, "error = %v", err)
+	}
 	fmt.Fprintf(w, "res = %v", res)
+
 }
 
 func main() {
