@@ -6,10 +6,10 @@ WORKDIR /go/src/RPN
 
 RUN go get github.com/gorilla/mux && go get github.com/golang-collections/collections/stack
 
-RUN go build
+RUN go build -o rpn -v
 
 FROM oraclelinux:7-slim
 
-COPY --from=builder /go/src/RPN/RPN /bin
+COPY --from=builder /go/src/RPN/rpn /bin
 
-CMD ["RPN"]
+CMD ["rpn"]
