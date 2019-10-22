@@ -2,7 +2,6 @@ package parser
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 
 	"github.com/golang-collections/collections/stack"
@@ -25,6 +24,9 @@ func EvalRPN(tokens []string) (int, error) {
 
 		right := stk.Pop()
 		left := stk.Pop()
+		if right == nil || left == nil {
+			return 0, fmt.Errorf("invailid rpn input")
+		}
 
 		if token == "+" {
 			stk.Push(left.(int) + right.(int))
@@ -42,6 +44,10 @@ func EvalRPN(tokens []string) (int, error) {
 			stk.Push(left.(int) / right.(int))
 		}
 	}
-	log.Printf("reach here")
+
+	if stk.Len() > 1 {
+		return 0, fmt.Errorf("invailid rpn input")
+	}
+
 	return stk.Peek().(int), nil
 }

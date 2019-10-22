@@ -34,6 +34,17 @@ func TestEvalRPN(t *testing.T) {
 			errors.New("failed to cast token to int: strconv.Atoi: parsing \"--10\": invalid syntax"),
 			27,
 		},
+		{
+			[]string{"10", "-1", "+", "*"},
+			errors.New("invailid rpn input"),
+			27,
+		},
+
+		{
+			[]string{"10", "-1", "+", "2"},
+			errors.New("invailid rpn input"),
+			27,
+		},
 	}
 
 	for _, test := range tests {

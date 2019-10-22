@@ -4,7 +4,6 @@ import (
 	"RPN/model"
 	"RPN/parser"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -15,14 +14,16 @@ import (
 func RpnHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		panic(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	log.Println(string(body))
 
 	var inputs model.RPNInputs
 	err = json.Unmarshal(body, &inputs)
 	if err != nil {
-		panic(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	log.Printf("input %v", inputs)
@@ -34,7 +35,8 @@ func RpnHandler(w http.ResponseWriter, r *http.Request) {
 		res, err := parser.EvalRPN(strs)
 		if err != nil {
 			log.Printf("erro: %v", err)
-			fmt.Fprintf(w, "error = %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		log.Printf("res = %v", res)
 
@@ -46,7 +48,7 @@ func RpnHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := json.NewEncoder(w).Encode(resRPN); err != nil {
-		fmt.Fprintf(w, "error = %v", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
-	fmt.Fprintf(w, "res = %v", resRPN)
 }
