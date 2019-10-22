@@ -34,7 +34,7 @@ func RpnHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%q\n", strs)
 		res, err := parser.EvalRPN(strs)
 		if err != nil {
-			log.Printf("erro: %v", err)
+			log.Printf("error: %v", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
@@ -46,6 +46,8 @@ func RpnHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		resRPN.RPN = append(resRPN.RPN, rpn)
 	}
+
+	w.Header().Set("Content-Type", "application/json")
 
 	if err := json.NewEncoder(w).Encode(resRPN); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
