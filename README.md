@@ -52,9 +52,48 @@ make docker-run
 ```
 curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"rpns":[{"input":"10 -1 +"},{"input":"10 -2 +"}]}' http://localhost:8080/parse
 ```
-
+```
+curl -H "Accept: application/json" -H "Content-type: application/json" -X GET http://localhost:8080/health
+```
 
 ## API
 ### /parse
 This api recieves single reverse polish notation string as input and return result as JSON format.
-
+#### Input
+```json
+{
+	"rpns": [{
+			"input": "10 -1 +"
+		},
+		{
+			"input": "10 -2 +"
+		}
+	]
+}
+```
+#### Output
+```
+{
+    "rpn": [
+        {
+            "name": "10 -1 +",
+            "result": 9
+        },
+        {
+            "name": "10 -2 +",
+            "result": 8
+        }
+    ]
+}
+```
+### /Health
+This api helps load balancer check the server's healty situation
+#### Input
+N/A
+#### Output
+```json
+{
+    "status": "OK",
+    "code": 200
+}
+```
