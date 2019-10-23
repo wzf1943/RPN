@@ -10,6 +10,20 @@ import (
 	"strings"
 )
 
+// HealthHandler get request from load balancer and return status of
+// server
+func HealthHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	health := model.Health{
+		Status:     "OK",
+		StatusCode: http.StatusOK,
+	}
+	if err := json.NewEncoder(w).Encode(health); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
 // RpnHandler get the reverse polish notaiton request from client
 func RpnHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)

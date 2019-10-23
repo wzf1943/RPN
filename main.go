@@ -21,6 +21,7 @@ func main() {
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/parse", api.RpnHandler).Methods("POST")
+	router.HandleFunc("/health", api.HealthHandler).Methods("GET")
 
 	srv := &http.Server{
 		Addr:         "0.0.0.0:8080",

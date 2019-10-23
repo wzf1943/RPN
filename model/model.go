@@ -16,3 +16,8 @@ type RPNInput struct {
 type RPNInputs struct {
 	Inputs []RPNInput `json:"rpns"`
 }
+
+type Health struct {
+	Status     string `json:"status"`
+	StatusCode int    `json:"code"`
+}
