@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"RPN/api"
+	"RPN/stdlog"
 
 	"github.com/gorilla/mux"
 	"github.com/jessevdk/go-flags"
@@ -20,10 +21,16 @@ var options struct {
 	ServerReadTimeout  time.Duration `long:"srtimeout" description:"the duration for server read timeout" default:"15s"`
 	IPAdrress          string        `long:"ip" description:"IP address of service" default:"0.0.0.0" env:"IP_ADDRESS"`
 	Port               string        `long:"port" description:"Port number of service" default:"8080" env:"PORT"`
+	RPNLog             string        `long:"stdlog" description:"std log file path" default:"rpn_std.log" env:"STD_LOG"`
+	RPNErrLog          string        `long:"errlog" description:"std error log file path" default:"rpn_error.log" env:"ERR_LOG"`
 }
 
 func main() {
 	flags.Parse(&options)
+
+	stdlog.SetLogFiles(options.RPNLog, options.RPNErrLog)
+	logger := log.New(stdlog.Out, "main:", log.LstdFlags)
+	logger.Println("starting server now")
 
 	router := RegisterService()
 
@@ -49,7 +56,7 @@ func main() {
 	defer cancel()
 	srv.Shutdown(ctx)
 
-	log.Println("shutting down")
+	logger.Println("shutting down")
 	os.Exit(0)
 }
 
