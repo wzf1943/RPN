@@ -13,6 +13,10 @@ func EvalRPN(tokens []string) (int, error) {
 	stk := stack.New()
 
 	for _, token := range tokens {
+		if token == "" {
+			continue
+		}
+
 		if token[0] == '-' && len(token) > 1 || token[0] >= '0' && token[0] <= '9' {
 			num, err := strconv.Atoi(token)
 			if err != nil {
