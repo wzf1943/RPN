@@ -8,10 +8,8 @@ import (
 	"os/signal"
 	"time"
 
-	"RPN/api"
 	"RPN/stdlog"
 
-	"github.com/gorilla/mux"
 	"github.com/jessevdk/go-flags"
 )
 
@@ -60,10 +58,10 @@ func main() {
 	os.Exit(0)
 }
 
-// RegisterService creates mux router
-func RegisterService() *mux.Router {
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/parse", api.RpnHandler).Methods("POST")
-	router.HandleFunc("/health", api.HealthHandler).Methods("GET")
-	return router
-}
+// // RegisterService creates mux router
+// func RegisterService() *mux.Router {
+// 	router := mux.NewRouter().StrictSlash(true)
+// 	router.HandleFunc("/parse", api.RpnHandler).Methods("POST")
+// 	router.HandleFunc("/health", api.HealthHandler).Methods("GET")
+// 	return router
+// }

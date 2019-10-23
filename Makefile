@@ -7,6 +7,7 @@ GOGET=$(GOCMD) get
 BINARY_NAME=rpn
 BINARY_UNIX=$(BINARY_NAME)_unix
 PORT_NAME=8080
+LOG=*.log
 
 all: test build
 build:
@@ -17,6 +18,7 @@ clean:
 		$(GOCLEAN)
 		rm -f $(BINARY_NAME)
 		rm -f $(BINARY_UNIX)
+		rm -f $(LOG)
 run:
 		$(GOBUILD) -o $(BINARY_NAME) -v
 		./$(BINARY_NAME)
