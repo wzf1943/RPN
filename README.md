@@ -4,6 +4,10 @@ RPN is a web server that can parse reverse polish notation string and then write
 ## System Diagram
 RPN will use master and slave mode to make sure whole system has high avaible feature. The distribuit system algorithm will use memberlist protocal. 
 
+![avatar](https://raw.githubusercontent.com/wzf1943/RPN/master/doc/API.png)
+
+![avatar](https://raw.githubusercontent.com/wzf1943/RPN/master/doc/system.png)
+
 ## Getting Started
 These instructions will get you a copy of the RPN up and running on your local machine.
 
