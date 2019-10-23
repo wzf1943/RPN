@@ -4,7 +4,7 @@ COPY . /go/src/RPN
 
 WORKDIR /go/src/RPN
 
-RUN go get github.com/gorilla/mux && go get github.com/golang-collections/collections/stack
+RUN go get github.com/gorilla/mux && go get github.com/golang-collections/collections/stack && go get github.com/jessevdk/go-flags
 
 RUN go build -o rpn -v
 

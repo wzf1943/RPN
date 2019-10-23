@@ -17,6 +17,7 @@ golang:1.10
 ```
 go get github.com/gorilla/mux
 go get github.com/golang-collections/collections/stack
+go get github.com/jessevdk/go-flags
 ```
 ## Running the tests
 ### Unit test
